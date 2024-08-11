@@ -76,7 +76,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>找找和你同科別的同學</title>
-</head>
+    <script>
+        // 在頁面加載時，從 localStorage 取出保存的姓名並填入表單
+        window.onload = function() {
+            var savedName = localStorage.getItem('savedName');
+            if (savedName) {
+                document.getElementById('name').value = savedName;
+            }
+        };
+
+        // 在表單提交時，將姓名保存到 localStorage
+        function saveName() {
+            var name = document.getElementById('name').value;
+            localStorage.setItem('savedName', name);
+        }
+    </script>
+</head>    
 <body>
     <h1>找找和你同科別的同學</h1>
     <form method="POST">
