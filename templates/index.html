@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,6 +13,43 @@
 
         <label for="week">週次:</label>
         <input type="text" id="week" name="week" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if output %}
+        <h2>Results for {{ name }} in {{ week }}:</h2>
+        <p>{{ department }}</p>
+        <p>{{ count }}</p>
+        <ul>
+            {% for item in output %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>找找和你同科別的同學</title>
+</head>
+<body>
+    <h1>找找和你同科別的同學</h1>
+    <form method="POST">
+        <label for="name">姓名:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="week">週次:</label>
+        <select id="week" name="week" required>
+            <option value="" disabled selected>選擇週次</option>
+            {% for i in range(1, 41) %}
+                <option value="Week {{ i }}">Week {{ i }}</option>
+            {% endfor %}
+        </select><br><br>
 
         <input type="submit" value="Submit">
     </form>
