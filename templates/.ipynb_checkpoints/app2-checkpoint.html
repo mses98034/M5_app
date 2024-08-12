@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查找同科別人員和週次</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .week-list, .person-list {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>查找同科別人員和週次</h1>
+
+    <!-- 切換到原有功能的按鈕 -->
+    <button onclick="location.href='/app1'">找找和你同科別的同學</button>
+
+    <form method="POST">
+        <label for="name">姓名:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="department">科別:</label>
+        <input type="text" id="department" name="department" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if output %}
+        <div class="result">
+            <h2>結果：</h2>
+            <div class="week-list">
+                <strong>週次：</strong><br>
+                {% for line in output.splitlines() %}
+                    {% if '週次：' in line %}
+                        {{ line.replace('週次：', '') }}<br>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="person-list">
+                <strong>人員：</strong><br>
+                {% set persons = output.split('人員：')[1].split(', ') %}
+                {{ persons | join(', ') }}
+            </div>
+        </div>
+    {% endif %}
+</body>
+</html>

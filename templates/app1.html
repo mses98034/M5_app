@@ -1,99 +1,16 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>找找和你同科別的同學</title>
-</head>
-<body>
-    <h1>找找和你同科別的同學</h1>
-    <form method="POST">
-        <label for="name">姓名:</label>
-        <input type="text" id="name" name="name" required><br><br>
-
-        <label for="week">週次:</label>
-        <input type="text" id="week" name="week" required><br><br>
-
-        <input type="submit" value="Submit">
-    </form>
-
-    {% if output %}
-        <h2>Results for {{ name }} in {{ week }}:</h2>
-        <p>{{ department }}</p>
-        <p>{{ count }}</p>
-        <ul>
-            {% for item in output %}
-                <li>{{ item }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-</body>
-</html>
- -->
-
-
- <!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>找找和你同科別的同學</title>
-</head>
-<body>
-    <h1>找找和你同科別的同學</h1>
-    <form method="POST">
-        <label for="name">姓名:</label>
-        <input type="text" id="name" name="name" required><br><br>
-
-        <label for="week">週次:</label>
-        <select id="week" name="week" required>
-            <option value="" disabled selected>選擇週次</option>
-            {% for i in range(1, 41) %}
-                <option value="Week {{ i }}">Week {{ i }}</option>
-            {% endfor %}
-        </select><br><br>
-
-        <input type="submit" value="Submit">
-    </form>
-
-    {% if output %}
-        <h2>Results for {{ name }} in {{ week }}:</h2>
-        <p>{{ department }}</p>
-        <p>{{ count }}</p>
-        <ul>
-            {% for item in output %}
-                <li>{{ item }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>找找和你同科別的同學</title>
-    <script>
-        // 在頁面加載時，從 localStorage 取出保存的姓名並填入表單
-        window.onload = function() {
-            var savedName = localStorage.getItem('savedName');
-            if (savedName) {
-                document.getElementById('name').value = savedName;
-            }
-        };
-
-        // 在表單提交時，將姓名保存到 localStorage
-        function saveName() {
-            var name = document.getElementById('name').value;
-            localStorage.setItem('savedName', name);
-        }
-    </script>
-</head>    
+</head>
 <body>
     <h1>找找和你同科別的同學</h1>
+
+    <!-- 切換到新功能的按鈕 -->
+    <button onclick="location.href='/app2'">查找同科別人員和週次</button>
+
     <form method="POST">
         <label for="name">姓名:</label>
         <input type="text" id="name" name="name" required><br><br>
@@ -142,17 +59,15 @@
             <option value="Week 39">Week 39 (4/28-5/4)</option>
             <option value="Week 40">Week 40 (5/5-5/11)</option>
         </select><br><br>
-
         <input type="submit" value="Submit">
     </form>
 
-    {% if output %}
-        <h2>Results for {{ name }} in {{ week }}:</h2>
-        <p>{{ department }}</p>
-        <p>{{ count }}</p>
+    {% if department %}
+        <h2>{{ name }}在{{ week }} ({{ week_date }})的科別：{{ department }}</h2>
+        <h3>同科別的同學 ({{ count }}):</h3>
         <ul>
-            {% for item in output %}
-                <li>{{ item }}</li>
+            {% for peer in peers %}
+                <li>{{ peer }}</li>
             {% endfor %}
         </ul>
     {% endif %}
