@@ -30,7 +30,34 @@
         <input type="text" id="name" name="name" required><br><br>
 
         <label for="department">科別:</label>
-        <input type="text" id="department" name="department" required><br><br>
+        <select id="department" name="department" required>
+            <option value="" disabled selected>選擇科別</option>
+            <option value="CHE">CHE</option>
+            <option value="CPT">CPT</option>
+            <option value="CRS">CRS</option>
+            <option value="CS">CS</option>
+            <option value="CV">CV</option>
+            <option value="CVS">CVS</option>
+            <option value="FAM">FAM</option>
+            <option value="GI">GI</option>
+            <option value="GS">GS</option>
+            <option value="GU">GU</option>
+            <option value="GYN">GYN</option>
+            <option value="HEM">HEM</option>
+            <option value="INF">INF</option>
+            <option value="LIC">LIC</option>
+            <option value="MET">MET</option>
+            <option value="NEP">NEP</option>
+            <option value="NEU">NEU</option>
+            <option value="NS">NS</option>
+            <option value="ORT">ORT</option>
+            <option value="PED">PED</option>
+            <option value="PGS">PGS</option>
+            <option value="PS">PS</option>
+            <option value="PSY">PSY</option>
+            <option value="RAD">RAD</option>
+            <option value="RIA">RIA</option>
+        </select><br><br>
 
         <input type="submit" value="Submit">
     </form>
@@ -49,7 +76,8 @@
             <div class="person-list">
                 <strong>人員：</strong><br>
                 {% set persons = output.split('人員：')[1].split(', ') %}
-                {{ persons | join(', ') }}
+                {% set unique_persons = persons|unique %}
+                {{ unique_persons | join(', ') }}
             </div>
         </div>
     {% endif %}

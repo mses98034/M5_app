@@ -50,6 +50,9 @@ week_to_dates = {
     "Week 40": "5/5-5/11"
 }
 
+# 獲取所有科別代號
+all_departments = pd.unique(data.iloc[:, 3:].values.ravel())
+
 # 找找和你同科別的同學 (原有功能)
 @app.route('/', methods=['GET', 'POST'])  # 根路徑指向這個功能
 @app.route('/app1', methods=['GET', 'POST'])
